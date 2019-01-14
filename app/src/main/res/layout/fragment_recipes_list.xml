@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="model"
+            type="br.com.udacity.ruyano.recipes.viewmodels.RecipesViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipes_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{model.recipesRecyclerViewVisibility}"/>
+
+        <View
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{model.emptyViewVisibility}"/>
+
+        <View
+            android:id="@+id/no_internet_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{model.noInternetViewVisibility}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
