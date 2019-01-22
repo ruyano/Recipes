@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.databinding.FragmentRecipesListBinding;
 import br.com.udacity.ruyano.recipes.models.Recipe;
+import br.com.udacity.ruyano.recipes.utils.NetworkUtil;
 import br.com.udacity.ruyano.recipes.viewmodels.RecipesViewModel;
 
 
@@ -28,13 +30,10 @@ public class RecipesListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setupBindings(savedInstanceState);
-
         return inflater.inflate(R.layout.fragment_recipes_list, container, false);
+
     }
 
     private void setupBindings(Bundle savedInstanceState) {
@@ -45,11 +44,14 @@ public class RecipesListFragment extends Fragment {
         fragmentRecipesListBinding.setModel(viewModel);
 
         setupRecyclerView();
-
-        // TODO:- verificar conexão com a internet
-
         setupRecipesList();
-        viewModel.getRecipes();
+        setupOnItemSelected();
+
+        if (NetworkUtil.isConected(getContext())) {
+            viewModel.getRecipes();
+        } else {
+            viewModel.showNoInternetView();
+        }
 
     }
 
@@ -57,10 +59,24 @@ public class RecipesListFragment extends Fragment {
         viewModel.getRecipesLiveData().observe(this, new Observer<List<Recipe>>() {
             @Override
             public void onChanged(List<Recipe> recipes) {
-
+                if (recipes != null && recipes.size() > 0) {
+                    viewModel.getAdapter().notifyDataSetChanged();
+                    viewModel.showRecipesList();
+                } else {
+                    viewModel.showEmptyView();
+                }
             }
         });
 
+    }
+
+    private void setupOnItemSelected() {
+        viewModel.getSelectedRecipeMutableLiveData().observe(this, new Observer<Recipe>() {
+            @Override
+            public void onChanged(Recipe recipe) {
+                Toast.makeText(getContext(), recipe.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setupRecyclerView() {
@@ -69,4 +85,5 @@ public class RecipesListFragment extends Fragment {
         fragmentRecipesListBinding.recipesRecyclerview.setAdapter(viewModel.getAdapter());
 
     }
+
 }

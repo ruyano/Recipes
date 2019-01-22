@@ -19,6 +19,8 @@ public class RecipesViewModel extends ViewModel {
 
     private RecipeRepository repository;
     private RecipesAdapter recipesAdapter;
+    private MutableLiveData<Recipe> selectedRecipeMutableLiveData;
+
 
     public void init() {
         recipesRecyclerViewVisibility = new ObservableInt(View.GONE);
@@ -26,6 +28,7 @@ public class RecipesViewModel extends ViewModel {
         emptyViewVisibility = new ObservableInt(View.GONE);
         repository = new RecipeRepository();
         recipesAdapter = new RecipesAdapter(this);
+        selectedRecipeMutableLiveData = new MutableLiveData<>();
 
     }
 
@@ -44,11 +47,44 @@ public class RecipesViewModel extends ViewModel {
 
     }
 
-    public Object getRecipeAt(Integer position) {
+    public Recipe getRecipeAt(Integer position) {
         if (repository.getRecipesLiveData().getValue() != null
                 && repository.getRecipesLiveData().getValue().size() > position) {
             return repository.getRecipesLiveData().getValue().get(position);
         }
         return null;
+    }
+
+    public void onItemClick(Integer index) {
+        Recipe selected = getRecipeAt(index);
+        if (selected != null)
+            selectedRecipeMutableLiveData.setValue(selected);
+
+    }
+
+    public MutableLiveData<Recipe> getSelectedRecipeMutableLiveData() {
+        return selectedRecipeMutableLiveData;
+
+    }
+
+    public void showRecipesList() {
+        recipesRecyclerViewVisibility.set(View.VISIBLE);
+        noInternetViewVisibility.set(View.GONE);
+        emptyViewVisibility.set(View.GONE);
+
+    }
+
+    public void showNoInternetView() {
+        recipesRecyclerViewVisibility.set(View.GONE);
+        noInternetViewVisibility.set(View.VISIBLE);
+        emptyViewVisibility.set(View.GONE);
+
+    }
+
+    public void showEmptyView() {
+        recipesRecyclerViewVisibility.set(View.GONE);
+        noInternetViewVisibility.set(View.GONE);
+        emptyViewVisibility.set(View.VISIBLE);
+
     }
 }

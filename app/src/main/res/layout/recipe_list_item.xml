@@ -4,20 +4,25 @@
     <data>
 
         <variable
-            name="recipe"
-            type="br.com.udacity.ruyano.recipes.models.Recipe" />
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="model"
+            type="br.com.udacity.ruyano.recipes.viewmodels.RecipesViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClickListener="@{() -> model.onItemClick(position)}">
 
         <TextView
             android:id="@+id/recipe_name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{recipe.name}"/>
+            android:text="@{model.getRecipeAt(position).name}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
