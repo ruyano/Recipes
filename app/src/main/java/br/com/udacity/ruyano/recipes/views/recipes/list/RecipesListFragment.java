@@ -1,13 +1,14 @@
-package br.com.udacity.ruyano.recipes.views;
+package br.com.udacity.ruyano.recipes.views.recipes.list;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -22,12 +23,15 @@ import br.com.udacity.ruyano.recipes.viewmodels.RecipesViewModel;
 
 public class RecipesListFragment extends Fragment {
 
+    public static RecipesListFragment newInstance() {
+        return new RecipesListFragment();
+
+    }
+
+    private OnRecipeClickListener mCallback;
     private RecipesViewModel viewModel;
     private FragmentRecipesListBinding fragmentRecipesListBinding;
 
-    public static RecipesListFragment newInstance() {
-        return new RecipesListFragment();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,7 +78,7 @@ public class RecipesListFragment extends Fragment {
         viewModel.getSelectedRecipeMutableLiveData().observe(this, new Observer<Recipe>() {
             @Override
             public void onChanged(Recipe recipe) {
-                Toast.makeText(getContext(), recipe.getName(), Toast.LENGTH_SHORT).show();
+                mCallback.onRecipeSelected(recipe);
             }
         });
     }
@@ -83,6 +87,30 @@ public class RecipesListFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         fragmentRecipesListBinding.recipesRecyclerview.setLayoutManager(linearLayoutManager);
         fragmentRecipesListBinding.recipesRecyclerview.setAdapter(viewModel.getAdapter());
+
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            mCallback = (OnRecipeClickListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnImageClickListener");
+        }
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallback = null;
+    }
+
+    public interface OnRecipeClickListener {
+        void onRecipeSelected(Recipe recipe);
 
     }
 

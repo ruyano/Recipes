@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.networking.repositories.RecipeRepository;
-import br.com.udacity.ruyano.recipes.views.RecipesAdapter;
+import br.com.udacity.ruyano.recipes.views.recipes.list.RecipesAdapter;
 
 public class RecipesViewModel extends ViewModel {
 
