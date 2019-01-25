@@ -32,16 +32,15 @@ public class RecipesListFragment extends Fragment {
     private RecipesViewModel viewModel;
     private FragmentRecipesListBinding fragmentRecipesListBinding;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        fragmentRecipesListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipes_list, container, false);
         setupBindings(savedInstanceState);
-        return inflater.inflate(R.layout.fragment_recipes_list, container, false);
+        return fragmentRecipesListBinding.getRoot();
 
     }
 
     private void setupBindings(Bundle savedInstanceState) {
-        fragmentRecipesListBinding = DataBindingUtil.setContentView(getActivity(), R.layout.fragment_recipes_list);
         viewModel = ViewModelProviders.of(this).get(RecipesViewModel.class);
         if (savedInstanceState == null)
             viewModel.init();

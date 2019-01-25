@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/two_panel_linear_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:showDividers="middle"
     android:baselineAligned="false"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <fragment
         android:id="@+id/master_list_fragment"
         android:name="br.com.udacity.ruyano.recipes.views.recipes.list.RecipesListFragment"
-        android:layout_width="400dp"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        tools:layout="@layout/fragment_recipes_list" />
 
-    <View
+    <View android:background="#000000"
         android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+        android:layout_height="wrap_content" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/master_detail_fragment"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent" />
+        android:background="@android:color/white"
+        android:layout_weight="3" />
 
 </LinearLayout>

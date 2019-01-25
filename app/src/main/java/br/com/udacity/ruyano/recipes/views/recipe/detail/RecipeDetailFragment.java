@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.databinding.FragmentRecipeDetailBinding;
 import br.com.udacity.ruyano.recipes.models.Ingredient;
@@ -57,20 +58,20 @@ public class RecipeDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        fragmentRecipeDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe_detail, container, false);
         setupBindings(savedInstanceState);
-        return inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+        return fragmentRecipeDetailBinding.getRoot();
 
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
 
     private void setupBindings(Bundle savedInstanceState) {
-        fragmentRecipeDetailBinding = DataBindingUtil.setContentView(getActivity(), R.layout.fragment_recipe_detail);
         viewModel = ViewModelProviders.of(this).get(RecipeDetailsViewModel.class);
         if (savedInstanceState == null)
             viewModel.init();
@@ -109,6 +110,7 @@ public class RecipeDetailFragment extends Fragment {
             public void onChanged(Recipe recipe) {
                 viewModel.getIngredientsAdapter().notifyDataSetChanged();
                 viewModel.getStepAdapter().notifyDataSetChanged();
+                fragmentRecipeDetailBinding.recipeNameTextview.setText(recipe.getName());
 
             }
         });
