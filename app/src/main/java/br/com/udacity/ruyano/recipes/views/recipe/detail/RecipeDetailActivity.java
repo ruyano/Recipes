@@ -1,17 +1,18 @@
 package br.com.udacity.ruyano.recipes.views.recipe.detail;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.Objects;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
-
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.MenuItem;
-
-import java.util.Objects;
+import br.com.udacity.ruyano.recipes.models.Step;
 
 public class RecipeDetailActivity extends AppCompatActivity implements RecipeDetailFragment.OnFragmentInteractionListener {
 
@@ -79,7 +80,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onStepSelected(Step step) {
+        Toast.makeText(this, step.getShortDescription(), Toast.LENGTH_SHORT).show();
+        // TODO - exibir nova tela de detalhes do step
     }
 }

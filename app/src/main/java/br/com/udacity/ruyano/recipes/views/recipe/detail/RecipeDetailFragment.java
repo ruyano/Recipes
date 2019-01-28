@@ -64,13 +64,6 @@ public class RecipeDetailFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-
     private void setupBindings(Bundle savedInstanceState) {
         viewModel = ViewModelProviders.of(this).get(RecipeDetailsViewModel.class);
         if (savedInstanceState == null)
@@ -83,6 +76,7 @@ public class RecipeDetailFragment extends Fragment {
             setupIngredentsListView();
             setupStepsRecyclerView();
             observeRecipes();
+            setupOnStepSelected();
         } else {
             // TODO - tratar erro quando não tiver recipe
 
@@ -117,6 +111,16 @@ public class RecipeDetailFragment extends Fragment {
 
     }
 
+    private void setupOnStepSelected() {
+        viewModel.getSelectedStepMutableLiveData().observe(this, new Observer<Step>() {
+            @Override
+            public void onChanged(Step step) {
+                mListener.onStepSelected(step);
+            }
+        });
+
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -136,7 +140,7 @@ public class RecipeDetailFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onStepSelected(Step step);
+
     }
 }

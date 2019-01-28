@@ -13,11 +13,13 @@ public class RecipeDetailsViewModel extends ViewModel {
     private MutableLiveData<Recipe> recipeMutableLiveData;
     private IngredientsAdapter ingredientsAdapter;
     private StepAdapter stepAdapter;
+    private MutableLiveData<Step> selectedStepMutableLiveData;
 
     public void init() {
         recipeMutableLiveData = new MutableLiveData<>();
         ingredientsAdapter = new IngredientsAdapter(this);
         stepAdapter = new StepAdapter(this);
+        selectedStepMutableLiveData = new MutableLiveData<>();
 
     }
 
@@ -41,6 +43,10 @@ public class RecipeDetailsViewModel extends ViewModel {
 
     }
 
+    public MutableLiveData<Step> getSelectedStepMutableLiveData() {
+        return selectedStepMutableLiveData;
+    }
+
     public Ingredient getIngredentAtPosition(Integer position) {
         if (recipeMutableLiveData.getValue() != null
                 && recipeMutableLiveData.getValue().getIngredients() != null
@@ -58,6 +64,13 @@ public class RecipeDetailsViewModel extends ViewModel {
             return recipeMutableLiveData.getValue().getSteps().get(position);
         }
         return null;
+
+    }
+
+    public void onStepClick(Integer index) {
+        Step step = getStepAtPosition(index);
+        if (step != null)
+            selectedStepMutableLiveData.setValue(step);
 
     }
 
