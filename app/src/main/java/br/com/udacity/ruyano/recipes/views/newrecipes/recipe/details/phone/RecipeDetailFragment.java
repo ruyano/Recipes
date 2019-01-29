@@ -1,31 +1,20 @@
-package br.com.udacity.ruyano.recipes.views.recipe.detail;
+package br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
-import java.util.ArrayList;
-
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.databinding.FragmentRecipeDetailBinding;
-import br.com.udacity.ruyano.recipes.models.Ingredient;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.models.Step;
-import br.com.udacity.ruyano.recipes.utils.NetworkUtil;
-import br.com.udacity.ruyano.recipes.viewmodels.RecipeDetailsViewModel;
-import br.com.udacity.ruyano.recipes.viewmodels.RecipesViewModel;
 
 public class RecipeDetailFragment extends Fragment {
 
@@ -62,6 +51,23 @@ public class RecipeDetailFragment extends Fragment {
         setupBindings(savedInstanceState);
         return fragmentRecipeDetailBinding.getRoot();
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     private void setupBindings(Bundle savedInstanceState) {
@@ -120,24 +126,6 @@ public class RecipeDetailFragment extends Fragment {
         });
 
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
 
     public interface OnFragmentInteractionListener {
         void onStepSelected(Step step);

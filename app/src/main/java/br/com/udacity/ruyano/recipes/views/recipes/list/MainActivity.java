@@ -1,17 +1,16 @@
 package br.com.udacity.ruyano.recipes.views.recipes.list;
 
+import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
-import br.com.udacity.ruyano.recipes.models.Step;
 import br.com.udacity.ruyano.recipes.views.recipe.detail.RecipeDetailActivity;
-import br.com.udacity.ruyano.recipes.views.recipe.detail.RecipeDetailFragment;
+import br.com.udacity.ruyano.recipes.views.recipe.detail.RecipeDetailContainerFragment;
 
-public class MainActivity extends AppCompatActivity implements RecipesListFragment.OnRecipeClickListener, RecipeDetailFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements RecipesListFragment.OnRecipeClickListener {
 
     private Boolean isUsingTablet = false;
 
@@ -28,9 +27,9 @@ public class MainActivity extends AppCompatActivity implements RecipesListFragme
     @Override
     public void onRecipeSelected(Recipe recipe) {
         if (isUsingTablet) {
-            RecipeDetailFragment recipeDetailFragment = RecipeDetailFragment.newInstance(recipe);
+            RecipeDetailContainerFragment recipeDetailContainerFragment = RecipeDetailContainerFragment.newInstance(recipe);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.master_detail_fragment, recipeDetailFragment);
+            ft.add(R.id.master_detail_fragment, recipeDetailContainerFragment);
             ft.commit();
 
         } else {
@@ -39,9 +38,4 @@ public class MainActivity extends AppCompatActivity implements RecipesListFragme
         }
     }
 
-    @Override
-    public void onStepSelected(Step step) {
-        Toast.makeText(this, step.getShortDescription(), Toast.LENGTH_SHORT).show();
-        // TODO - exibir nova tela de detalhes do step
-    }
 }

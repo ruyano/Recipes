@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.views.recipe.detail;
+package br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,7 +9,6 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import br.com.udacity.ruyano.recipes.BR;
 import br.com.udacity.ruyano.recipes.R;
-import br.com.udacity.ruyano.recipes.viewmodels.RecipeDetailsViewModel;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 

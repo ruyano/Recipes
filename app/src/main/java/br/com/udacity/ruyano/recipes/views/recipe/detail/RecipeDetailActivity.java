@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -13,6 +12,8 @@ import androidx.fragment.app.FragmentManager;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.models.Step;
+import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone.RecipeDetailFragment;
+import br.com.udacity.ruyano.recipes.views.step.detail.StepDetailActivity;
 
 public class RecipeDetailActivity extends AppCompatActivity implements RecipeDetailFragment.OnFragmentInteractionListener {
 
@@ -81,7 +82,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
 
     @Override
     public void onStepSelected(Step step) {
-        Toast.makeText(this, step.getShortDescription(), Toast.LENGTH_SHORT).show();
-        // TODO - exibir nova tela de detalhes do step
+        startActivity(StepDetailActivity.getIntent(this, step));
+
     }
 }

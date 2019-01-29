@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="br.com.udacity.ruyano.recipes.views.newrecipes.step.details.RecipeStepDetailViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/step_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:imageUrl="@{model.stepMutableLiveData.thumbnailURL}"
+            android:src="@drawable/ic_cooking" />
+
+        <TextView
+            android:id="@+id/step_description_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@{model.stepMutableLiveData.description, default=Description}"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+</layout>

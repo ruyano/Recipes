@@ -64,6 +64,8 @@ public class Step implements Parcelable {
         this.thumbnailURL = thumbnailURL;
     }
 
+    public Step() {
+    }
 
     protected Step(Parcel in) {
         id = in.readByte() == 0x00 ? null : in.readInt();

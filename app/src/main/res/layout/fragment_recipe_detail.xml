@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="br.com.udacity.ruyano.recipes.viewmodels.RecipeDetailsViewModel" />
+            type="br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone.RecipeDetailsViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -40,9 +40,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:textStyle="bold"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:text="@{model.recipeMutableLiveData.name, default=RecipeName}"/>
 
                 </LinearLayout>

@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.viewmodels;
+package br.com.udacity.ruyano.recipes.views.newrecipes.main;
 
 import android.view.View;
 
@@ -9,16 +9,15 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.networking.repositories.RecipeRepository;
-import br.com.udacity.ruyano.recipes.views.recipes.list.RecipesAdapter;
 
-public class RecipesViewModel extends ViewModel {
+public class NewMainViewModel extends ViewModel {
 
     public ObservableInt recipesRecyclerViewVisibility;
     public ObservableInt noInternetViewVisibility;
     public ObservableInt emptyViewVisibility;
 
     private RecipeRepository repository;
-    private RecipesAdapter recipesAdapter;
+    private NewRecipesAdapter recipesAdapter;
     private MutableLiveData<Recipe> selectedRecipeMutableLiveData;
 
     public void init() {
@@ -26,7 +25,7 @@ public class RecipesViewModel extends ViewModel {
         noInternetViewVisibility = new ObservableInt(View.GONE);
         emptyViewVisibility = new ObservableInt(View.GONE);
         repository = new RecipeRepository();
-        recipesAdapter = new RecipesAdapter(this);
+        recipesAdapter = new NewRecipesAdapter(this);
         selectedRecipeMutableLiveData = new MutableLiveData<>();
 
     }
@@ -41,7 +40,7 @@ public class RecipesViewModel extends ViewModel {
 
     }
 
-    public RecipesAdapter getAdapter() {
+    public NewRecipesAdapter getAdapter() {
         return recipesAdapter;
 
     }
@@ -58,7 +57,6 @@ public class RecipesViewModel extends ViewModel {
         Recipe selected = getRecipeAt(index);
         if (selected != null) {
             selectedRecipeMutableLiveData.setValue(selected);
-            recipesAdapter.setSelectedPos(index);
 
         }
 
@@ -90,4 +88,5 @@ public class RecipesViewModel extends ViewModel {
         emptyViewVisibility.set(View.VISIBLE);
 
     }
+
 }

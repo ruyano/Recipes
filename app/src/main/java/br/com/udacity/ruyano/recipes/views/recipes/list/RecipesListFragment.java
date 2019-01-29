@@ -46,7 +46,9 @@ public class RecipesListFragment extends Fragment {
             viewModel.init();
         fragmentRecipesListBinding.setModel(viewModel);
 
-        setupRecyclerView();
+        setupListRecyclerView();
+
+
         setupRecipesList();
         setupOnItemSelected();
 
@@ -82,12 +84,19 @@ public class RecipesListFragment extends Fragment {
         });
     }
 
-    private void setupRecyclerView() {
+    private void setupListRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         fragmentRecipesListBinding.recipesRecyclerview.setLayoutManager(linearLayoutManager);
         fragmentRecipesListBinding.recipesRecyclerview.setAdapter(viewModel.getAdapter());
 
     }
+
+//    private void setupGridRecyclerView() {
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+//        fragmentRecipesListBinding.recipesRecyclerview.setLayoutManager(gridLayoutManager);
+//        fragmentRecipesListBinding.recipesRecyclerview.setAdapter(viewModel.getAdapter());
+//
+//    }
 
     @Override
     public void onAttach(@NonNull Context context) {

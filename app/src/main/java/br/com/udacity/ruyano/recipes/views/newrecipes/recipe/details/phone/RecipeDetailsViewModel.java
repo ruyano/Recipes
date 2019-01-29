@@ -1,12 +1,10 @@
-package br.com.udacity.ruyano.recipes.viewmodels;
+package br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import br.com.udacity.ruyano.recipes.models.Ingredient;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.models.Step;
-import br.com.udacity.ruyano.recipes.views.recipe.detail.IngredientsAdapter;
-import br.com.udacity.ruyano.recipes.views.recipe.detail.StepAdapter;
 
 public class RecipeDetailsViewModel extends ViewModel {
 
