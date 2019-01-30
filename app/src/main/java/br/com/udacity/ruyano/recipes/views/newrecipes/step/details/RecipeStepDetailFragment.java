@@ -1,10 +1,45 @@
 package br.com.udacity.ruyano.recipes.views.newrecipes.step.details;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.DefaultRenderersFactory;
+import com.google.android.exoplayer2.ExoPlaybackException;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.LoadControl;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.Timeline;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.extractor.ExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.LoopingMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.TrackGroupArray;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultAllocator;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.upstream.cache.SimpleCache;
+import com.google.android.exoplayer2.util.Util;
+
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -19,6 +54,7 @@ public class RecipeStepDetailFragment extends Fragment {
     private Step step;
     private FragmentRecipeStepDetailBinding fragmentRecipeStepDetailBinding;
     private RecipeStepDetailViewModel viewModel;
+    private SimpleExoPlayer player;
 
     public RecipeStepDetailFragment() {}
 
@@ -60,4 +96,57 @@ public class RecipeStepDetailFragment extends Fragment {
 
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        initializePlayer();
+        if (step != null && step.getVideoURL() != null && !step.getVideoURL().isEmpty()) {
+            Uri uri = Uri.parse(step.getVideoURL());
+            buildMediaSource(uri);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (player!=null) {
+            player.release();
+            player = null;
+        }
+    }
+
+    private void initializePlayer() {
+        if (player == null) {
+            // 1. Create a default TrackSelector
+            LoadControl loadControl = new DefaultLoadControl(
+                    new DefaultAllocator(true, 16),
+                    VideoPlayerConfig.MIN_BUFFER_DURATION,
+                    VideoPlayerConfig.MAX_BUFFER_DURATION,
+                    VideoPlayerConfig.MIN_PLAYBACK_START_BUFFER,
+                    VideoPlayerConfig.MIN_PLAYBACK_RESUME_BUFFER, -1, true);
+
+            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+            TrackSelection.Factory videoTrackSelectionFactory =
+                    new AdaptiveTrackSelection.Factory(bandwidthMeter);
+            TrackSelector trackSelector =
+                    new DefaultTrackSelector(videoTrackSelectionFactory);
+            // 2. Create the player
+            player = ExoPlayerFactory.newSimpleInstance(getContext(), new DefaultRenderersFactory(getContext()), trackSelector, loadControl);
+            fragmentRecipeStepDetailBinding.playerView.setPlayer(player);
+        }
+
+    }
+
+    private void buildMediaSource(Uri mUri) {
+        // Produces DataSource instances through which media data is loaded.
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(getContext(),
+                Util.getUserAgent(getContext(), getString(R.string.app_name)));
+        // This is the MediaSource representing the media to be played.
+        MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(mUri);
+        // Prepare the player with the source.
+        player.prepare(videoSource);
+        player.setPlayWhenReady(true);
+
+    }
 }

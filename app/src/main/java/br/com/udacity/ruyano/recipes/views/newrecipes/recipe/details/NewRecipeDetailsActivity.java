@@ -6,6 +6,7 @@ import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.models.Step;
 import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone.RecipeDetailFragment;
 import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.tablet.RecipeDetailListFragment;
+import br.com.udacity.ruyano.recipes.views.newrecipes.step.details.RecipeStepActivity;
 import br.com.udacity.ruyano.recipes.views.newrecipes.step.details.RecipeStepDetailFragment;
 
 import android.content.Context;
@@ -42,6 +43,17 @@ public class NewRecipeDetailsActivity extends AppCompatActivity implements Recip
         if (savedInstanceState == null) {
             setupFragment();
         }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 
@@ -92,17 +104,6 @@ public class NewRecipeDetailsActivity extends AppCompatActivity implements Recip
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
-
-    @Override
     public void onStepSelected(Step step) {
         if (getResources().getBoolean(R.bool.isTablet)) {
             RecipeStepDetailFragment recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(step);
@@ -110,7 +111,7 @@ public class NewRecipeDetailsActivity extends AppCompatActivity implements Recip
                     .replace(R.id.detail_fragment, recipeStepDetailFragment)
                     .commit();
         } else {
-            Toast.makeText(this, step.getShortDescription(), Toast.LENGTH_SHORT).show();
+            startActivity(RecipeStepActivity.getIntent(this, recipe, recipe.getSteps().indexOf(step)));
         }
 
     }

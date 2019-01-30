@@ -25,7 +25,7 @@
         <activity android:name=".views.step.detail.StepDetailActivity" />
         <activity android:name=".views.recipes.list.MainActivity" />
         <activity android:name=".views.newrecipes.recipe.details.NewRecipeDetailsActivity" />
-        <activity android:name=".views.newrecipes.step.details.RecipeStepActivity"></activity>
+        <activity android:name=".views.newrecipes.step.details.RecipeStepActivity"/>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package br.com.udacity.ruyano.recipes.utils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import br.com.udacity.ruyano.recipes.R;
 
@@ -15,12 +16,17 @@ public class GlideUtil {
             if (imageView.getTag(R.id.image_url) == null || !imageView.getTag(R.id.image_url).equals(imageUrl)) {
                 imageView.setImageBitmap(null);
                 imageView.setTag(R.id.image_url, imageUrl);
-                Glide.with(imageView).load(imageUrl).into(imageView);
+                Glide.with(imageView)
+                        .load(imageUrl)
+                        .apply(new RequestOptions()
+                                .placeholder(R.drawable.ic_cooking)
+                                .centerCrop())
+                        .into(imageView);
             }
         } else {
             imageView.setTag(R.id.image_url, null);
-            imageView.setImageBitmap(null);
         }
+
     }
 
 }
