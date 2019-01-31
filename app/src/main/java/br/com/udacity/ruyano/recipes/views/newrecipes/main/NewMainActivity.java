@@ -1,5 +1,7 @@
 package br.com.udacity.ruyano.recipes.views.newrecipes.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -18,6 +20,12 @@ import br.com.udacity.ruyano.recipes.utils.NetworkUtil;
 import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.NewRecipeDetailsActivity;
 
 public class NewMainActivity extends AppCompatActivity {
+
+    public static Intent getIntent(Context context) {
+        Intent intent = new Intent(context, NewMainActivity.class);
+        return intent;
+
+    }
 
     private ActivityNewMainBinding activityNewMainBinding;
     private NewMainViewModel viewModel;
@@ -91,6 +99,7 @@ public class NewMainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Recipe recipe) {
                 startActivity(NewRecipeDetailsActivity.getIntent(NewMainActivity.this, recipe));
+                finish();
             }
         });
 

@@ -25,7 +25,21 @@
         <activity android:name=".views.step.detail.StepDetailActivity" />
         <activity android:name=".views.recipes.list.MainActivity" />
         <activity android:name=".views.newrecipes.recipe.details.NewRecipeDetailsActivity" />
-        <activity android:name=".views.newrecipes.step.details.RecipeStepActivity"/>
+        <activity android:name=".views.newrecipes.step.details.RecipeStepActivity" />
+
+        <receiver android:name=".views.newrecipes.widget.RecipeWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/reipe_widget_info" />
+        </receiver>
+
+        <service android:name=".views.newrecipes.widget.RecipeIngredientsWidgetRemoteViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 
 </manifest>

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.models.Step;
+import br.com.udacity.ruyano.recipes.utils.RecipeWidgetUtil;
+import br.com.udacity.ruyano.recipes.views.newrecipes.main.NewMainActivity;
 import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone.RecipeDetailFragment;
 import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.tablet.RecipeDetailListFragment;
 import br.com.udacity.ruyano.recipes.views.newrecipes.step.details.RecipeStepActivity;
@@ -39,11 +41,17 @@ public class NewRecipeDetailsActivity extends AppCompatActivity implements Recip
 
         getExtras();
         setActionBarTitle();
+        updateWidget();
 
         if (savedInstanceState == null) {
             setupFragment();
         }
 
+    }
+
+    private void updateWidget() {
+        if (recipe != null)
+            RecipeWidgetUtil.updateRecipeWidget(this, recipe);
     }
 
     @Override
@@ -55,6 +63,12 @@ public class NewRecipeDetailsActivity extends AppCompatActivity implements Recip
         }
         return super.onOptionsItemSelected(item);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(NewMainActivity.getIntent(this));
+        finish();
     }
 
     private void getExtras() {

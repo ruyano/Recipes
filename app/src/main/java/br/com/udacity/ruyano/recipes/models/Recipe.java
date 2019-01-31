@@ -145,4 +145,13 @@ public class Recipe implements Parcelable {
             return new Recipe[size];
         }
     };
+
+
+    public String getIngredientsString() {
+        String ingredientsString = "";
+        for (Ingredient ingredient : ingredients) {
+            ingredientsString = ingredientsString + ingredient.toString() + "/n";
+        }
+        return ingredientsString;
+    }
 }
