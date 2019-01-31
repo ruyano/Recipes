@@ -31,7 +31,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:padding="10dp"
-                android:src="@drawable/ic_cooking" />
+                android:src="@drawable/ic_cooking"
+                android:contentDescription="@string/recipe_image_content_description" />
 
             <TextView
                 android:id="@+id/recipe_name_textview"

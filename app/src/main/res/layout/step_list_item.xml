@@ -32,7 +32,8 @@
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/step_image_content_description" />
 
         <TextView
             android:id="@+id/textView"
@@ -63,7 +64,8 @@
             android:src="@drawable/ic_arrow_point_to_right"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/arow_content_description"/>
 
         <View
             android:id="@+id/view"

@@ -2,9 +2,13 @@
     <string name="app_name">Recipes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="appwidget_text">Recipe Name</string>
-    <string name="add_widget">Add widget</string>
-    <string name="ingredients">Ingredients</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="step_by_step">Step by step:</string>
+    <string name="recipe_image_content_description">Imagem da Receita pronta</string>
+    <string name="step_image_content_description">Imagens do passo</string>
+    <string name="arow_content_description">Seta indicando que item pode ser aberto</string>
 
 </resources>

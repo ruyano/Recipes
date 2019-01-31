@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        style="?android:attr/buttonBarStyle"
         android:layout_alignParentBottom="true">
 
         <Button
@@ -23,7 +24,9 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@color/colorAccent"
-            android:text="Previous"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/previous"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             android:onClick="onCLickPrevious"
             android:layout_margin="5dp"/>
@@ -34,7 +37,9 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@color/colorAccent"
-            android:text="Next"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/next"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             android:onClick="onCLickNex"
             android:layout_margin="5dp"/>

@@ -10,7 +10,7 @@
 
         <variable
             name="isSelected"
-            type="Boolean" />
+            type="boolean" />
 
         <variable
             name="model"
