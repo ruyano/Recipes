@@ -11,7 +11,6 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import br.com.udacity.ruyano.recipes.BR;
 import br.com.udacity.ruyano.recipes.R;
-import br.com.udacity.ruyano.recipes.viewmodels.RecipesViewModel;
 
 public class NewRecipesAdapter extends RecyclerView.Adapter<NewRecipesAdapter.ViewHolder> {
 

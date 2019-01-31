@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.main.NewMainActivity">
+        <activity android:name=".views.newrecipes.main.NewMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.details.NewRecipeDetailsActivity" />
-        <activity android:name=".views.details.RecipeStepActivity" />
+        <activity android:name=".views.newrecipes.recipe.details.NewRecipeDetailsActivity" />
+        <activity android:name=".views.newrecipes.step.details.RecipeStepActivity" />
 
-        <receiver android:name=".views.widget.RecipeWidget">
+        <receiver android:name=".views.newrecipes.widget.RecipeWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -34,7 +34,7 @@
                 android:resource="@xml/reipe_widget_info" />
         </receiver>
 
-        <service android:name=".views.widget.RecipeIngredientsWidgetRemoteViewsService"
+        <service android:name=".views.newrecipes.widget.RecipeIngredientsWidgetRemoteViewsService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
     </application>
