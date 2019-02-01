@@ -1,9 +1,7 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.main;
+package br.com.udacity.ruyano.recipes.views.recipe.details.tablet;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -12,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.com.udacity.ruyano.recipes.BR;
 import br.com.udacity.ruyano.recipes.R;
 
-public class NewRecipesAdapter extends RecyclerView.Adapter<NewRecipesAdapter.ViewHolder> {
+public class RecipeDetailListAdapter extends RecyclerView.Adapter<RecipeDetailListAdapter.ViewHolder> {
 
-    private NewMainViewModel viewModel;
+    private RecipeDetailListViewModel viewModel;
+    private int selectedPos = RecyclerView.NO_POSITION;
 
-    public NewRecipesAdapter(NewMainViewModel viewModel) {
+    public RecipeDetailListAdapter(RecipeDetailListViewModel viewModel) {
         this.viewModel = viewModel;
 
     }
@@ -26,7 +25,7 @@ public class NewRecipesAdapter extends RecyclerView.Adapter<NewRecipesAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, viewType, parent, false);
-        return new ViewHolder(binding);
+        return new RecipeDetailListAdapter.ViewHolder(binding);
 
     }
 
@@ -38,20 +37,27 @@ public class NewRecipesAdapter extends RecyclerView.Adapter<NewRecipesAdapter.Vi
 
     @Override
     public int getItemCount() {
-        if (viewModel.getRecipesLiveData() == null
-                || viewModel.getRecipesLiveData().getValue() == null)
+        if (viewModel.getRecipeMutableLiveData() == null
+                || viewModel.getRecipeMutableLiveData().getValue() == null
+                || viewModel.getRecipeMutableLiveData().getValue().getIngredients() == null)
             return 0;
-        return Objects.requireNonNull(viewModel.getRecipesLiveData().getValue()).size();
+        return viewModel.getRecipeMutableLiveData().getValue().getSteps().size();
+
     }
 
     @Override
     public int getItemViewType(int position) {
-        return R.layout.recipe_list_item;
+        return R.layout.recipe_detail_list_item;
 
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public void setSelectedPos(int selectedPos) {
+        this.selectedPos = selectedPos;
+        notifyDataSetChanged();
 
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
         final ViewDataBinding binding;
 
         ViewHolder(ViewDataBinding binding) {
@@ -60,11 +66,13 @@ public class NewRecipesAdapter extends RecyclerView.Adapter<NewRecipesAdapter.Vi
 
         }
 
-        void bind(NewMainViewModel viewModel, Integer position) {
+        void bind(RecipeDetailListViewModel viewModel, Integer position) {
             binding.setVariable(BR.position, position);
             binding.setVariable(BR.model, viewModel);
+            binding.setVariable(BR.isSelected, position == selectedPos);
             binding.executePendingBindings();
 
         }
     }
+
 }

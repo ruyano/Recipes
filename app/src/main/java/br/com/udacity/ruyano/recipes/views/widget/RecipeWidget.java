@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.widget;
+package br.com.udacity.ruyano.recipes.views.widget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -11,7 +11,7 @@ import android.widget.RemoteViews;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.utils.RecipeWidgetUtil;
-import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.NewRecipeDetailsActivity;
+import br.com.udacity.ruyano.recipes.views.recipe.details.RecipeDetailsActivity;
 
 /**
  * Implementation of App Widget functionality.
@@ -70,7 +70,7 @@ public class RecipeWidget extends AppWidgetProvider {
 
     private static PendingIntent getPendingIntent(Context context, Recipe recipe) {
         if (recipe != null) {
-            Intent intent = NewRecipeDetailsActivity.getIntent(context, recipe);
+            Intent intent = RecipeDetailsActivity.getIntent(context, recipe);
             return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
         return null;

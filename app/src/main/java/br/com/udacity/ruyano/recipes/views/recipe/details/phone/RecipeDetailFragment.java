@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone;
+package br.com.udacity.ruyano.recipes.views.recipe.details.phone;
 
 import android.content.Context;
 import android.os.Bundle;

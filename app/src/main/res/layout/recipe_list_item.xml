@@ -10,7 +10,7 @@
 
         <variable
             name="model"
-            type="br.com.udacity.ruyano.recipes.views.newrecipes.main.NewMainViewModel" />
+            type="br.com.udacity.ruyano.recipes.views.main.MainViewModel" />
 
     </data>
 

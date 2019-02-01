@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="br.com.udacity.ruyano.recipes.views.newrecipes.step.details.RecipeStepDetailViewModel" />
+            type="br.com.udacity.ruyano.recipes.views.step.details.RecipeStepDetailViewModel" />
     </data>
 
     <LinearLayout

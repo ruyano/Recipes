@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.tablet;
+package br.com.udacity.ruyano.recipes.views.recipe.details.tablet;
 
 import android.content.Context;
 import android.os.Bundle;

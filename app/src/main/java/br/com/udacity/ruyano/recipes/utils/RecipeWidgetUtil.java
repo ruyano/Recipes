@@ -9,7 +9,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 
 import br.com.udacity.ruyano.recipes.models.Recipe;
-import br.com.udacity.ruyano.recipes.views.newrecipes.widget.RecipeWidget;
+import br.com.udacity.ruyano.recipes.views.widget.RecipeWidget;
 
 public class RecipeWidgetUtil {
 

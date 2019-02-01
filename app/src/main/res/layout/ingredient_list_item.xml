@@ -9,7 +9,7 @@
 
         <variable
             name="model"
-            type="br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone.RecipeDetailsViewModel" />
+            type="br.com.udacity.ruyano.recipes.views.recipe.details.phone.RecipeDetailsViewModel" />
 
     </data>
 

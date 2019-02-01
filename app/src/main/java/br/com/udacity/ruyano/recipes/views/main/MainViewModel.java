@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.main;
+package br.com.udacity.ruyano.recipes.views.main;
 
 import android.view.View;
 
@@ -10,14 +10,14 @@ import androidx.lifecycle.ViewModel;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.networking.repositories.RecipeRepository;
 
-public class NewMainViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
 
     public ObservableInt recipesRecyclerViewVisibility;
     public ObservableInt noInternetViewVisibility;
     public ObservableInt emptyViewVisibility;
 
     private RecipeRepository repository;
-    private NewRecipesAdapter recipesAdapter;
+    private RecipesAdapter recipesAdapter;
     private MutableLiveData<Recipe> selectedRecipeMutableLiveData;
 
     public void init() {
@@ -25,7 +25,7 @@ public class NewMainViewModel extends ViewModel {
         noInternetViewVisibility = new ObservableInt(View.GONE);
         emptyViewVisibility = new ObservableInt(View.GONE);
         repository = new RecipeRepository();
-        recipesAdapter = new NewRecipesAdapter(this);
+        recipesAdapter = new RecipesAdapter(this);
         selectedRecipeMutableLiveData = new MutableLiveData<>();
 
     }
@@ -40,7 +40,7 @@ public class NewMainViewModel extends ViewModel {
 
     }
 
-    public NewRecipesAdapter getAdapter() {
+    public RecipesAdapter getAdapter() {
         return recipesAdapter;
 
     }

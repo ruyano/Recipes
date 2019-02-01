@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.widget;
+package br.com.udacity.ruyano.recipes.views.widget;
 
 import android.content.Intent;
 import android.widget.RemoteViewsService;

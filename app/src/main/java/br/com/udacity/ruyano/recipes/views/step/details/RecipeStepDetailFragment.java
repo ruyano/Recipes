@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.step.details;
+package br.com.udacity.ruyano.recipes.views.step.details;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

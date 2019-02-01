@@ -5,7 +5,7 @@
 
         <variable
             name="model"
-            type="br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.tablet.RecipeDetailListViewModel" />
+            type="br.com.udacity.ruyano.recipes.views.recipe.details.tablet.RecipeDetailListViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

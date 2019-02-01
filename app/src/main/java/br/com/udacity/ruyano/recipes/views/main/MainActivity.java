@@ -1,9 +1,8 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.main;
+package br.com.udacity.ruyano.recipes.views.main;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -17,18 +16,18 @@ import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.databinding.ActivityNewMainBinding;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.utils.NetworkUtil;
-import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.NewRecipeDetailsActivity;
+import br.com.udacity.ruyano.recipes.views.recipe.details.RecipeDetailsActivity;
 
-public class NewMainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     public static Intent getIntent(Context context) {
-        Intent intent = new Intent(context, NewMainActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         return intent;
 
     }
 
     private ActivityNewMainBinding activityNewMainBinding;
-    private NewMainViewModel viewModel;
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class NewMainActivity extends AppCompatActivity {
 
     private void setupViewBinding(Bundle savedInstanceState) {
         activityNewMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_new_main);
-        viewModel = ViewModelProviders.of(this).get(NewMainViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         if (savedInstanceState == null) {
             viewModel.init();
         }
@@ -98,7 +97,7 @@ public class NewMainActivity extends AppCompatActivity {
         viewModel.getSelectedRecipeMutableLiveData().observe(this, new Observer<Recipe>() {
             @Override
             public void onChanged(Recipe recipe) {
-                startActivity(NewRecipeDetailsActivity.getIntent(NewMainActivity.this, recipe));
+                startActivity(RecipeDetailsActivity.getIntent(MainActivity.this, recipe));
                 finish();
             }
         });

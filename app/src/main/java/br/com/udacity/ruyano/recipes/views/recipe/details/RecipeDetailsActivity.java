@@ -1,30 +1,29 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details;
+package br.com.udacity.ruyano.recipes.views.recipe.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.models.Step;
 import br.com.udacity.ruyano.recipes.utils.RecipeWidgetUtil;
-import br.com.udacity.ruyano.recipes.views.newrecipes.main.NewMainActivity;
-import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone.RecipeDetailFragment;
-import br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.tablet.RecipeDetailListFragment;
-import br.com.udacity.ruyano.recipes.views.newrecipes.step.details.RecipeStepActivity;
-import br.com.udacity.ruyano.recipes.views.newrecipes.step.details.RecipeStepDetailFragment;
+import br.com.udacity.ruyano.recipes.views.main.MainActivity;
+import br.com.udacity.ruyano.recipes.views.recipe.details.phone.RecipeDetailFragment;
+import br.com.udacity.ruyano.recipes.views.recipe.details.tablet.RecipeDetailListFragment;
+import br.com.udacity.ruyano.recipes.views.step.details.RecipeStepActivity;
+import br.com.udacity.ruyano.recipes.views.step.details.RecipeStepDetailFragment;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.Objects;
 
-public class NewRecipeDetailsActivity extends AppCompatActivity implements RecipeDetailFragment.OnFragmentInteractionListener, RecipeDetailListFragment.OnFragmentInteractionListener {
+public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDetailFragment.OnFragmentInteractionListener, RecipeDetailListFragment.OnFragmentInteractionListener {
 
     private static final String RECIPE_EXTRA = "RECIPE_EXTRA";
 
     public static Intent getIntent(Context context, Recipe recipe) {
-        Intent intent = new Intent(context, NewRecipeDetailsActivity.class);
+        Intent intent = new Intent(context, RecipeDetailsActivity.class);
         intent.putExtra(RECIPE_EXTRA, recipe);
         return intent;
 
@@ -67,7 +66,7 @@ public class NewRecipeDetailsActivity extends AppCompatActivity implements Recip
 
     @Override
     public void onBackPressed() {
-        startActivity(NewMainActivity.getIntent(this));
+        startActivity(MainActivity.getIntent(this));
         finish();
     }
 

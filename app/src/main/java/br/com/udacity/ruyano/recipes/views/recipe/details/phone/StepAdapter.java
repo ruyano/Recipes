@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.phone;
+package br.com.udacity.ruyano.recipes.views.recipe.details.phone;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,26 +10,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.com.udacity.ruyano.recipes.BR;
 import br.com.udacity.ruyano.recipes.R;
 
-public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
+public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
     private RecipeDetailsViewModel viewModel;
 
-    public IngredientsAdapter(RecipeDetailsViewModel viewModel) {
+    public StepAdapter(RecipeDetailsViewModel viewModel) {
         this.viewModel = viewModel;
 
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public StepAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, viewType, parent, false);
-        return new IngredientsAdapter.ViewHolder(binding);
+        return new StepAdapter.ViewHolder(binding);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StepAdapter.ViewHolder holder, int position) {
         holder.bind(viewModel, position);
 
     }
@@ -38,14 +38,15 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public int getItemCount() {
         if (viewModel.getRecipeMutableLiveData() == null
                 || viewModel.getRecipeMutableLiveData().getValue() == null
-                || viewModel.getRecipeMutableLiveData().getValue().getIngredients() == null)
+                || viewModel.getRecipeMutableLiveData().getValue().getSteps() == null)
             return 0;
-        return viewModel.getRecipeMutableLiveData().getValue().getIngredients().size();
+        return viewModel.getRecipeMutableLiveData().getValue().getSteps().size();
+
     }
 
     @Override
     public int getItemViewType(int position) {
-        return R.layout.ingredient_list_item;
+        return R.layout.step_list_item;
 
     }
 
@@ -65,5 +66,4 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         }
     }
-
 }

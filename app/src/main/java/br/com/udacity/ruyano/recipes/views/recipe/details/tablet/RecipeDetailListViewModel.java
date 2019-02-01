@@ -1,4 +1,4 @@
-package br.com.udacity.ruyano.recipes.views.newrecipes.recipe.details.tablet;
+package br.com.udacity.ruyano.recipes.views.recipe.details.tablet;
 
 import java.util.ArrayList;
 import java.util.List;
