@@ -14,7 +14,10 @@ import br.com.udacity.ruyano.recipes.views.step.details.RecipeStepDetailFragment
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -40,7 +43,6 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
 
         getExtras();
         setActionBarTitle();
-        updateWidget();
 
         if (savedInstanceState == null) {
             setupFragment();
@@ -48,9 +50,12 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
 
     }
 
-    private void updateWidget() {
-        if (recipe != null)
-            RecipeWidgetUtil.updateRecipeWidget(this, recipe);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.details_activity_menu, menu);
+        return true;
+
     }
 
     @Override
@@ -58,6 +63,9 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                return true;
+            case R.id.pin_to_widget:
+                updateWidget();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -68,6 +76,13 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     public void onBackPressed() {
         startActivity(MainActivity.getIntent(this));
         finish();
+    }
+
+    private void updateWidget() {
+        if (recipe != null) {
+            RecipeWidgetUtil.updateRecipeWidget(this, recipe);
+            Toast.makeText(this, getString(R.string.recipe_pinned_to_widget), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void getExtras() {

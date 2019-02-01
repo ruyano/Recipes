@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Recipes</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="appwidget_text">Recipe Name</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
@@ -10,5 +9,8 @@
     <string name="recipe_image_content_description">Imagem da Receita pronta</string>
     <string name="step_image_content_description">Imagens do passo</string>
     <string name="arow_content_description">Seta indicando que item pode ser aberto</string>
+    <string name="pin_to_widget">Pin to Widget</string>
+    <string name="recipe_pinned_to_widget">Recipe pinned to widget</string>
+    <string name="select_a_recipe_widget">Select a Recipe to view here, by clicking in the icon:</string>
 
 </resources>

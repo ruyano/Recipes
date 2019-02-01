@@ -6,11 +6,13 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.utils.RecipeWidgetUtil;
+import br.com.udacity.ruyano.recipes.views.main.MainActivity;
 import br.com.udacity.ruyano.recipes.views.recipe.details.RecipeDetailsActivity;
 
 /**
@@ -37,14 +39,24 @@ public class RecipeWidget extends AppWidgetProvider {
             svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
             views.setRemoteAdapter(R.id.recipe_ingredients_widget_listView, svcIntent);
 
+            views.setViewVisibility(R.id.recipe_view, View.VISIBLE);
+            views.setViewVisibility(R.id.empty_view, View.GONE);
+
+            PendingIntent pendingIntent = getRecipePendingIntent(context, recipe);
+            if (pendingIntent != null)
+                views.setOnClickPendingIntent(R.id.recipe_name_widget_textview, pendingIntent);
+
         } else {
             CharSequence widgetText = context.getString(R.string.appwidget_text);
             views.setTextViewText(R.id.recipe_name_widget_textview, widgetText);
-        }
 
-        PendingIntent pendingIntent = getPendingIntent(context, recipe);
-        if (pendingIntent != null)
-            views.setOnClickPendingIntent(R.id.recipe_name_widget_textview, pendingIntent);
+            views.setViewVisibility(R.id.recipe_view, View.GONE);
+            views.setViewVisibility(R.id.empty_view, View.VISIBLE);
+
+            PendingIntent pendingIntent = getMainPendingIntent(context);
+            if (pendingIntent != null)
+                views.setOnClickPendingIntent(R.id.empty_view, pendingIntent);
+        }
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -68,12 +80,19 @@ public class RecipeWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    private static PendingIntent getPendingIntent(Context context, Recipe recipe) {
+    private static PendingIntent getMainPendingIntent(Context context) {
+        Intent intent = MainActivity.getIntent(context);
+        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+    }
+
+    private static PendingIntent getRecipePendingIntent(Context context, Recipe recipe) {
         if (recipe != null) {
             Intent intent = RecipeDetailsActivity.getIntent(context, recipe);
             return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
         return null;
+
     }
 
 }
