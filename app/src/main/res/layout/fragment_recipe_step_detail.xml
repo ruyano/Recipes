@@ -10,35 +10,48 @@
             type="br.com.udacity.ruyano.recipes.views.step.details.RecipeStepDetailViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:ignore="UseCompoundDrawables">
+        android:layout_height="match_parent">
 
-        <!--<com.google.android.exoplayer2.ui.PlayerView-->
+        <FrameLayout
+            android:id="@+id/ingredients_framelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{model.ingredientsVisibility}"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables"
+            android:visibility="@{model.stepDetailsVisibility}">
+
+            <!--<com.google.android.exoplayer2.ui.PlayerView-->
             <!--android:id="@+id/player_view"-->
             <!--android:focusable="true"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"/>-->
 
-        <ImageView
-            android:id="@+id/step_image_view"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="10dp"
-            app:imageUrl="@{model.stepMutableLiveData.thumbnailURL}"
-            android:src="@drawable/ic_cooking"
-            android:contentDescription="@string/recipe_image_content_description" />
+            <ImageView
+                android:id="@+id/step_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:imageUrl="@{model.stepMutableLiveData.thumbnailURL}"
+                android:src="@drawable/ic_cooking"
+                android:contentDescription="@string/recipe_image_content_description" />
 
-        <TextView
-            android:id="@+id/step_description_textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@{model.stepMutableLiveData.description, default=Description}"
-            android:layout_margin="10dp"/>
+            <TextView
+                android:id="@+id/step_description_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@{model.stepMutableLiveData.description, default=Description}"
+                android:layout_margin="10dp"/>
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </layout>

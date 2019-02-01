@@ -12,12 +12,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.databinding.FragmentRecipeStepDetailBinding;
+import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.models.Step;
+import br.com.udacity.ruyano.recipes.views.recipe.details.phone.RecipeDetailFragment;
 
 public class RecipeStepDetailFragment extends Fragment {
 
+    private static final String ARG_RECIPE = "ARG_RECIPE";
     private static final String ARG_STEP = "ARG_STEP";
 
+    private Recipe recipe;
     private Step step;
     private FragmentRecipeStepDetailBinding fragmentRecipeStepDetailBinding;
     private RecipeStepDetailViewModel viewModel;
@@ -25,9 +29,10 @@ public class RecipeStepDetailFragment extends Fragment {
 
     public RecipeStepDetailFragment() {}
 
-    public static RecipeStepDetailFragment newInstance(Step step) {
+    public static RecipeStepDetailFragment newInstance(Recipe recipe, Step step) {
         RecipeStepDetailFragment fragment = new RecipeStepDetailFragment();
         Bundle args = new Bundle();
+        args.putParcelable(ARG_RECIPE, recipe);
         args.putParcelable(ARG_STEP, step);
         fragment.setArguments(args);
         return fragment;
@@ -38,6 +43,7 @@ public class RecipeStepDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            recipe = getArguments().getParcelable(ARG_RECIPE);
             step = getArguments().getParcelable(ARG_STEP);
         }
 
@@ -59,6 +65,16 @@ public class RecipeStepDetailFragment extends Fragment {
             viewModel.setStepMutableLiveData(step);
         } else {
             // TODO - tratar erro quando não tiver recipe
+        }
+
+        if (step.getShortDescription().equals(getString(R.string.ingredients_list_description))) {
+            viewModel.showIngredients();
+            RecipeDetailFragment recipeDetailFragment = RecipeDetailFragment.newInstance(recipe, false);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.ingredients_framelayout, recipeDetailFragment)
+                    .commit();
+        } else {
+            viewModel.showstepDetails();
         }
 
     }

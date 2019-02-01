@@ -124,7 +124,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     }
 
     private void setupPhoneFragments() {
-        RecipeDetailFragment recipeDetailFragment = RecipeDetailFragment.newInstance(recipe);
+        RecipeDetailFragment recipeDetailFragment = RecipeDetailFragment.newInstance(recipe, true);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.recipe_detail_fragment, recipeDetailFragment)
                 .commit();
@@ -134,7 +134,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     @Override
     public void onStepSelected(Step step) {
         if (getResources().getBoolean(R.bool.isTablet)) {
-            RecipeStepDetailFragment recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(step);
+            RecipeStepDetailFragment recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(recipe, step);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.detail_fragment, recipeStepDetailFragment)
                     .commit();

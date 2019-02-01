@@ -5,6 +5,7 @@
     <string name="previous">Previous</string>
     <string name="next">Next</string>
     <string name="ingredients">Ingredients:</string>
+    <string name="ingredients_list_description">Ingredients</string>
     <string name="step_by_step">Step by step:</string>
     <string name="recipe_image_content_description">Imagem da Receita pronta</string>
     <string name="step_image_content_description">Imagens do passo</string>

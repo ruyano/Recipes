@@ -1,18 +1,27 @@
 package br.com.udacity.ruyano.recipes.views.recipe.details.tablet;
 
+import android.app.Application;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.models.Step;
 
-public class RecipeDetailListViewModel extends ViewModel {
+public class RecipeDetailListViewModel extends AndroidViewModel {
 
     private MutableLiveData<Recipe> recipeMutableLiveData;
     private RecipeDetailListAdapter adapter;
     private MutableLiveData<Step> selectedStep;
+
+    public RecipeDetailListViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     public void init() {
         recipeMutableLiveData = new MutableLiveData<>();
@@ -22,9 +31,9 @@ public class RecipeDetailListViewModel extends ViewModel {
     }
 
     public void setRecipeMutableLiveData(Recipe recipe) {
-        if (!recipe.getSteps().get(0).getShortDescription().equals("Ingredients")) {
+        if (!recipe.getSteps().get(0).getShortDescription().equals(getApplication().getString(R.string.ingredients_list_description))) {
             Step ingredients = new Step();
-            ingredients.setShortDescription("Ingredients");
+            ingredients.setShortDescription(getApplication().getString(R.string.ingredients_list_description));
             List<Step> newSteps = new ArrayList<>();
             newSteps.add(ingredients);
             newSteps.addAll(recipe.getSteps());

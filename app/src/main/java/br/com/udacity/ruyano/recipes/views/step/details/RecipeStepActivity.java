@@ -91,7 +91,7 @@ public class RecipeStepActivity extends AppCompatActivity {
                 && recipe.getSteps() != null
                 && recipe.getSteps().size() >= stepPosition
                 && recipe.getSteps().get(stepPosition) != null) {
-            RecipeStepDetailFragment recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(recipe.getSteps().get(stepPosition));
+            RecipeStepDetailFragment recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(recipe, recipe.getSteps().get(stepPosition));
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.step_detail_fragment, recipeStepDetailFragment)
                     .commit();

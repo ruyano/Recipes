@@ -19,18 +19,21 @@ import br.com.udacity.ruyano.recipes.models.Step;
 public class RecipeDetailFragment extends Fragment {
 
     private static final String ARG_RECIPE = "recipe";
+    private static final String ARG_SHOW_STEPS = "ARG_SHOW_STEPS";
 
     private Recipe recipe;
+    private Boolean showSteps;
     private OnFragmentInteractionListener mListener;
     private RecipeDetailsViewModel viewModel;
     private FragmentRecipeDetailBinding fragmentRecipeDetailBinding;
 
     public RecipeDetailFragment() {}
 
-    public static RecipeDetailFragment newInstance(Recipe recipe) {
+    public static RecipeDetailFragment newInstance(Recipe recipe, Boolean showSteps) {
         RecipeDetailFragment fragment = new RecipeDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_RECIPE, recipe);
+        args.putBoolean(ARG_SHOW_STEPS, showSteps);
         fragment.setArguments(args);
         return fragment;
 
@@ -41,6 +44,7 @@ public class RecipeDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             recipe = getArguments().getParcelable(ARG_RECIPE);
+            showSteps = getArguments().getBoolean(ARG_SHOW_STEPS);
         }
 
     }
@@ -80,12 +84,18 @@ public class RecipeDetailFragment extends Fragment {
         if (recipe != null) {
             viewModel.setRecipeMutableLiveData(recipe);
             setupIngredentsListView();
-            setupStepsRecyclerView();
             observeRecipes();
+            setupStepsRecyclerView();
             setupOnStepSelected();
         } else {
             // TODO - tratar erro quando não tiver recipe
 
+        }
+
+        if (showSteps) {
+            viewModel.showSteps();
+        } else {
+            viewModel.hideSteps();
         }
 
     }

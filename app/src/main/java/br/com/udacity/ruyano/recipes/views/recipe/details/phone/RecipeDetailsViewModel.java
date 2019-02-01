@@ -1,5 +1,8 @@
 package br.com.udacity.ruyano.recipes.views.recipe.details.phone;
 
+import android.view.View;
+
+import androidx.databinding.ObservableInt;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import br.com.udacity.ruyano.recipes.models.Ingredient;
@@ -12,12 +15,14 @@ public class RecipeDetailsViewModel extends ViewModel {
     private IngredientsAdapter ingredientsAdapter;
     private StepAdapter stepAdapter;
     private MutableLiveData<Step> selectedStepMutableLiveData;
+    private ObservableInt showSteps;
 
     public void init() {
         recipeMutableLiveData = new MutableLiveData<>();
         ingredientsAdapter = new IngredientsAdapter(this);
         stepAdapter = new StepAdapter(this);
         selectedStepMutableLiveData = new MutableLiveData<>();
+        showSteps = new ObservableInt(View.GONE);
 
     }
 
@@ -45,6 +50,12 @@ public class RecipeDetailsViewModel extends ViewModel {
         return selectedStepMutableLiveData;
     }
 
+    public ObservableInt getShowSteps() {
+        return showSteps;
+
+    }
+
+
     public Ingredient getIngredentAtPosition(Integer position) {
         if (recipeMutableLiveData.getValue() != null
                 && recipeMutableLiveData.getValue().getIngredients() != null
@@ -69,6 +80,16 @@ public class RecipeDetailsViewModel extends ViewModel {
         Step step = getStepAtPosition(index);
         if (step != null)
             selectedStepMutableLiveData.setValue(step);
+
+    }
+
+    public void showSteps() {
+        showSteps.set(View.VISIBLE);
+
+    }
+
+    public void hideSteps() {
+        showSteps.set(View.GONE);
 
     }
 
