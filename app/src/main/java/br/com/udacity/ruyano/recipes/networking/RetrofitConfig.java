@@ -10,9 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitConfig {
 
     private static RetrofitConfig ourInstance;
-    private Retrofit retrofit;
+    private final Retrofit retrofit;
 
-    public RetrofitConfig() {
+    private RetrofitConfig() {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

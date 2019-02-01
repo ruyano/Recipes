@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import java.util.Objects;
+
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.utils.RecipeWidgetUtil;
 
-public class RecipeIngredientsWidgetRemoteFactory implements RemoteViewsService.RemoteViewsFactory {
+class RecipeIngredientsWidgetRemoteFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    private Context context;
+    private final Context context;
     private int appWidgetId;
 
     public RecipeIngredientsWidgetRemoteFactory(Context context, Intent intent) {
@@ -38,14 +40,19 @@ public class RecipeIngredientsWidgetRemoteFactory implements RemoteViewsService.
 
     @Override
     public int getCount() {
-        return RecipeWidgetUtil.getRecipeObject(context) == null ? 0 : RecipeWidgetUtil.getRecipeObject(context).getIngredients().size();
+        if (RecipeWidgetUtil.getRecipeObject(context) == null
+                || RecipeWidgetUtil.getRecipeObject(context).getIngredients() == null) {
+            return 0;
+        } else {
+            return Objects.requireNonNull(RecipeWidgetUtil.getRecipeObject(context)).getIngredients().size();
+        }
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
         RemoteViews row = new RemoteViews(context.getPackageName(), R.layout.ingredient_list_item);
 
-        row.setTextViewText(R.id.ingredient_textview, RecipeWidgetUtil.getRecipeObject(context).getIngredients().get(position).toString());
+        row.setTextViewText(R.id.ingredient_textview, Objects.requireNonNull(RecipeWidgetUtil.getRecipeObject(context)).getIngredients().get(position).toString());
 
         return(row);
 

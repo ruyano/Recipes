@@ -12,7 +12,7 @@ import retrofit2.Response;
 
 public class RecipeRepository {
 
-    private MutableLiveData<List<Recipe>> recipesLiveData;
+    private final MutableLiveData<List<Recipe>> recipesLiveData;
 
     public RecipeRepository() {
         this.recipesLiveData = new MutableLiveData<>();

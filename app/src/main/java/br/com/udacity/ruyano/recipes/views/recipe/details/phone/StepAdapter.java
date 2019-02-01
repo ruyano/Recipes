@@ -12,7 +12,7 @@ import br.com.udacity.ruyano.recipes.R;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
-    private RecipeDetailsViewModel viewModel;
+    private final RecipeDetailsViewModel viewModel;
 
     public StepAdapter(RecipeDetailsViewModel viewModel) {
         this.viewModel = viewModel;

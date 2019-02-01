@@ -34,7 +34,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_recipe_details);
+        setContentView(R.layout.activity_recipe_details);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 

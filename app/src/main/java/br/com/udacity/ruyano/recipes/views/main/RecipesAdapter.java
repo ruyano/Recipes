@@ -14,7 +14,7 @@ import br.com.udacity.ruyano.recipes.R;
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
 
-    private MainViewModel viewModel;
+    private final MainViewModel viewModel;
 
     public RecipesAdapter(MainViewModel viewModel) {
         this.viewModel = viewModel;

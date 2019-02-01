@@ -7,7 +7,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import br.com.udacity.ruyano.recipes.R;
 
-public class GlideUtil {
+class GlideUtil {
 
     public static void loadImage(ImageView imageView, String imageUrl) {
         if (imageUrl != null) {

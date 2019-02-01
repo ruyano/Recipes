@@ -13,7 +13,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import br.com.udacity.ruyano.recipes.R;
-import br.com.udacity.ruyano.recipes.databinding.ActivityNewMainBinding;
+
+import br.com.udacity.ruyano.recipes.databinding.ActivityMainBinding;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.utils.NetworkUtil;
 import br.com.udacity.ruyano.recipes.views.recipe.details.RecipeDetailsActivity;
@@ -21,29 +22,28 @@ import br.com.udacity.ruyano.recipes.views.recipe.details.RecipeDetailsActivity;
 public class MainActivity extends AppCompatActivity {
 
     public static Intent getIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        return intent;
+        return new Intent(context, MainActivity.class);
 
     }
 
-    private ActivityNewMainBinding activityNewMainBinding;
+    private ActivityMainBinding activityMainBinding;
     private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_main);
+        setContentView(R.layout.activity_main);
 
         setupViewBinding(savedInstanceState);
     }
 
     private void setupViewBinding(Bundle savedInstanceState) {
-        activityNewMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_new_main);
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         if (savedInstanceState == null) {
             viewModel.init();
         }
-        activityNewMainBinding.setModel(viewModel);
+        activityMainBinding.setModel(viewModel);
 
         if (getResources().getBoolean(R.bool.isTablet)) {
             setupGridRecyclerView();
@@ -65,15 +65,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupLinearRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        activityNewMainBinding.recipesRecyclerview.setLayoutManager(linearLayoutManager);
-        activityNewMainBinding.recipesRecyclerview.setAdapter(viewModel.getAdapter());
+        activityMainBinding.recipesRecyclerview.setLayoutManager(linearLayoutManager);
+        activityMainBinding.recipesRecyclerview.setAdapter(viewModel.getAdapter());
 
     }
 
     private void setupGridRecyclerView() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        activityNewMainBinding.recipesRecyclerview.setLayoutManager(gridLayoutManager);
-        activityNewMainBinding.recipesRecyclerview.setAdapter(viewModel.getAdapter());
+        activityMainBinding.recipesRecyclerview.setLayoutManager(gridLayoutManager);
+        activityMainBinding.recipesRecyclerview.setAdapter(viewModel.getAdapter());
 
     }
 

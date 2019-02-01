@@ -67,7 +67,7 @@ public class Step implements Parcelable {
     public Step() {
     }
 
-    protected Step(Parcel in) {
+    Step(Parcel in) {
         id = in.readByte() == 0x00 ? null : in.readInt();
         shortDescription = in.readString();
         description = in.readString();

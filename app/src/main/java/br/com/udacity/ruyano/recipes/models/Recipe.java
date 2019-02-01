@@ -83,7 +83,7 @@ public class Recipe implements Parcelable {
         id = in.readByte() == 0x00 ? null : in.readInt();
         name = in.readString();
         if (in.readByte() == 0x01) {
-            ingredients = new ArrayList<Ingredient>();
+            ingredients = new ArrayList<>();
             in.readList(ingredients, Ingredient.class.getClassLoader());
         } else {
             ingredients = null;
@@ -146,12 +146,4 @@ public class Recipe implements Parcelable {
         }
     };
 
-
-    public String getIngredientsString() {
-        String ingredientsString = "";
-        for (Ingredient ingredient : ingredients) {
-            ingredientsString = ingredientsString + ingredient.toString() + "/n";
-        }
-        return ingredientsString;
-    }
 }

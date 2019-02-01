@@ -12,7 +12,7 @@ import br.com.udacity.ruyano.recipes.R;
 
 public class RecipeDetailListAdapter extends RecyclerView.Adapter<RecipeDetailListAdapter.ViewHolder> {
 
-    private RecipeDetailListViewModel viewModel;
+    private final RecipeDetailListViewModel viewModel;
     private int selectedPos = RecyclerView.NO_POSITION;
 
     public RecipeDetailListAdapter(RecipeDetailListViewModel viewModel) {
