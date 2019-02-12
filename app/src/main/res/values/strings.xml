@@ -13,5 +13,9 @@
     <string name="pin_to_widget">Pin to Widget</string>
     <string name="recipe_pinned_to_widget">Recipe pinned to widget</string>
     <string name="select_a_recipe_widget">Select a Recipe to view here, by clicking in the icon:</string>
+    <string name="check_connection">Check your connection and try again</string>
+    <string name="no_internet_icon_content_description">No internet icon</string>
+    <string name="empty_icon">Empty icon</string>
+    <string name="empty_view_text">The list is empty.</string>
 
 </resources>

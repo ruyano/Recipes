@@ -12,11 +12,15 @@ public class RecipeStepDetailViewModel extends ViewModel {
     private MutableLiveData<Step> stepMutableLiveData;
     public ObservableInt ingredientsVisibility;
     public ObservableInt stepDetailsVisibility;
+    public ObservableInt videoVisibility;
+    public ObservableInt imageVisibility;
 
     public void init() {
         stepMutableLiveData = new MutableLiveData<>();
         ingredientsVisibility = new ObservableInt(View.GONE);
         stepDetailsVisibility = new ObservableInt(View.GONE);
+        videoVisibility = new ObservableInt(View.GONE);
+        imageVisibility = new ObservableInt(View.GONE);
 
     }
 
@@ -39,6 +43,18 @@ public class RecipeStepDetailViewModel extends ViewModel {
     public void showstepDetails() {
         ingredientsVisibility = new ObservableInt(View.GONE);
         stepDetailsVisibility = new ObservableInt(View.VISIBLE);
+
+    }
+
+    public void showVideo() {
+        videoVisibility = new ObservableInt(View.VISIBLE);
+        imageVisibility = new ObservableInt(View.GONE);
+
+    }
+
+    public void showImage() {
+        videoVisibility = new ObservableInt(View.GONE);
+        imageVisibility = new ObservableInt(View.VISIBLE);
 
     }
 

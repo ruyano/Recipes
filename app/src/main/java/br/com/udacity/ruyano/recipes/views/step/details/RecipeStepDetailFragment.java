@@ -1,11 +1,18 @@
 package br.com.udacity.ruyano.recipes.views.step.details;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -56,6 +63,15 @@ public class RecipeStepDetailFragment extends Fragment {
         return fragmentRecipeStepDetailBinding.getRoot();
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (player!=null) {
+            player.release();
+            player = null;
+        }
+    }
+
     private void setupBindings(Bundle savedInstanceState) {
         viewModel = ViewModelProviders.of(this).get(RecipeStepDetailViewModel.class);
         if (savedInstanceState == null)
@@ -67,6 +83,12 @@ public class RecipeStepDetailFragment extends Fragment {
             // TODO - tratar erro quando não tiver recipe
         }
 
+        validateIngredientsOnTablet();
+        showVideoOrImage();
+
+    }
+
+    private void validateIngredientsOnTablet() {
         if (step.getShortDescription().equals(getString(R.string.ingredients_list_description))) {
             viewModel.showIngredients();
             RecipeDetailFragment recipeDetailFragment = RecipeDetailFragment.newInstance(recipe, false);
@@ -76,60 +98,33 @@ public class RecipeStepDetailFragment extends Fragment {
         } else {
             viewModel.showstepDetails();
         }
-
     }
 
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        initializePlayer();
-//        if (step != null && step.getVideoURL() != null && !step.getVideoURL().isEmpty()) {
-//            Uri uri = Uri.parse(step.getVideoURL());
-//            buildMediaSource(uri);
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        if (player!=null) {
-//            player.release();
-//            player = null;
-//        }
-//    }
-//
-//    private void initializePlayer() {
-//        if (player == null) {
-//            // 1. Create a default TrackSelector
-//            LoadControl loadControl = new DefaultLoadControl(
-//                    new DefaultAllocator(true, 16),
-//                    VideoPlayerConfig.MIN_BUFFER_DURATION,
-//                    VideoPlayerConfig.MAX_BUFFER_DURATION,
-//                    VideoPlayerConfig.MIN_PLAYBACK_START_BUFFER,
-//                    VideoPlayerConfig.MIN_PLAYBACK_RESUME_BUFFER, -1, true);
-//
-//            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-//            TrackSelection.Factory videoTrackSelectionFactory =
-//                    new AdaptiveTrackSelection.Factory(bandwidthMeter);
-//            TrackSelector trackSelector =
-//                    new DefaultTrackSelector(videoTrackSelectionFactory);
-//            // 2. Create the player
-//            player = ExoPlayerFactory.newSimpleInstance(getContext(), new DefaultRenderersFactory(getContext()), trackSelector, loadControl);
-//            fragmentRecipeStepDetailBinding.playerView.setPlayer(player);
-//        }
-//
-//    }
-//
-//    private void buildMediaSource(Uri mUri) {
-//        // Produces DataSource instances through which media data is loaded.
-//        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(getContext(),
-//                Util.getUserAgent(getContext(), getString(R.string.app_name)));
-//        // This is the MediaSource representing the media to be played.
-//        MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
-//                .createMediaSource(mUri);
-//        // Prepare the player with the source.
-//        player.prepare(videoSource);
-//        player.setPlayWhenReady(true);
-//
-//    }
+    private void showVideoOrImage() {
+        if (step != null && step.getVideoURL() != null && !step.getVideoURL().isEmpty()) {
+            Uri uri = Uri.parse(step.getVideoURL());
+            setupVideo(uri);
+            viewModel.showVideo();
+        } else {
+            viewModel.showImage();
+        }
+    }
+
+    private void setupVideo(Uri mUri) {
+        if (player == null) {
+            player = ExoPlayerFactory.newSimpleInstance(getContext());
+            fragmentRecipeStepDetailBinding.playerView.setPlayer(player);
+        }
+
+        // Produces DataSource instances through which media data is loaded.
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(getContext(),
+                Util.getUserAgent(getContext(), getString(R.string.app_name)));
+        // This is the MediaSource representing the media to be played.
+        MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(mUri);
+        // Prepare the player with the source.
+        player.prepare(videoSource);
+        player.setPlayWhenReady(true);
+
+    }
 }

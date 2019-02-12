@@ -27,11 +27,13 @@
             tools:ignore="UseCompoundDrawables"
             android:visibility="@{model.stepDetailsVisibility}">
 
-            <!--<com.google.android.exoplayer2.ui.PlayerView-->
-            <!--android:id="@+id/player_view"-->
-            <!--android:focusable="true"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"/>-->
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/player_view"
+                android:focusable="true"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:visibility="@{model.videoVisibility}" />
 
             <ImageView
                 android:id="@+id/step_image_view"
@@ -40,7 +42,8 @@
                 android:layout_margin="10dp"
                 app:imageUrl="@{model.stepMutableLiveData.thumbnailURL}"
                 android:src="@drawable/ic_cooking"
-                android:contentDescription="@string/recipe_image_content_description" />
+                android:contentDescription="@string/recipe_image_content_description"
+                android:visibility="@{model.imageVisibility}" />
 
             <TextView
                 android:id="@+id/step_description_textView"

@@ -18,16 +18,14 @@
             android:layout_height="match_parent"
             android:visibility="@{model.recipesRecyclerViewVisibility}"/>
 
-        <View
+        <include
             android:id="@+id/empty_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            layout="@layout/empty_view"
             android:visibility="@{model.emptyViewVisibility}"/>
 
-        <View
+        <include
             android:id="@+id/no_internet_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            layout="@layout/no_internet_view"
             android:visibility="@{model.noInternetViewVisibility}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

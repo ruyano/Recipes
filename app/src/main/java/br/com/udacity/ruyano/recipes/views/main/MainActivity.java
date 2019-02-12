@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         if (NetworkUtil.isConected(this)) {
             viewModel.getRecipes();
         } else {
-            // TODO - melhorar view de no internet
             viewModel.showNoInternetView();
         }
 
@@ -85,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                     viewModel.getAdapter().notifyDataSetChanged();
                     viewModel.showRecipesList();
                 } else {
-                    // TODO - melhor view de empty view
                     viewModel.showEmptyView();
                 }
             }
