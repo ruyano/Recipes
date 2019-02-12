@@ -3,11 +3,13 @@ package br.com.udacity.ruyano.recipes.views.step.details;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
@@ -51,6 +53,12 @@ public class RecipeStepActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
     }
 
     private void setupButtons() {
@@ -117,6 +125,4 @@ public class RecipeStepActivity extends AppCompatActivity {
         }
 
     }
-
-
 }

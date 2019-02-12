@@ -75,6 +75,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     @Override
     public void onBackPressed() {
         startActivity(MainActivity.getIntent(this));
+        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
         finish();
     }
 
@@ -140,6 +141,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
                     .commit();
         } else {
             startActivity(RecipeStepActivity.getIntent(this, recipe, recipe.getSteps().indexOf(step)));
+            overridePendingTransition(R.anim.enter, R.anim.exit);
         }
 
     }

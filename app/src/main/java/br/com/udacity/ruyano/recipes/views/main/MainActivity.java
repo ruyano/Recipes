@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Recipe recipe) {
                 startActivity(RecipeDetailsActivity.getIntent(MainActivity.this, recipe));
+                overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();
             }
         });
