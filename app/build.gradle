@@ -67,4 +67,7 @@ dependencies {
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
     implementation "com.squareup.okhttp3:okhttp:${okHttpVersion}"
 
+    // okhttp3-idling-resource IdlingResource para as chamadas REST, usado para o teste esperar a comclusão da chamada.
+    androidTestImplementation "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
+
 }

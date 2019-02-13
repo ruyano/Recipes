@@ -12,15 +12,16 @@ public class RetrofitConfig {
 
     private static RetrofitConfig ourInstance;
     private final Retrofit retrofit;
+    private OkHttpClient okHttpClient;
 
     private RetrofitConfig() {
 
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        okHttpClient = new OkHttpClient.Builder().build();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .client(httpClient.build())
+                .client(okHttpClient)
                 .build();
 
     }
@@ -30,6 +31,10 @@ public class RetrofitConfig {
             ourInstance = new RetrofitConfig();
         }
         return ourInstance;
+    }
+
+    public OkHttpClient getOkHttpClient() {
+        return okHttpClient;
     }
 
     public IAPIService getApi() {
