@@ -1,5 +1,12 @@
 package br.com.udacity.ruyano.recipes.utils;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
+
+import br.com.udacity.ruyano.recipes.models.Recipe;
+
 public class RecipesRequestSucssesMock {
 
     public static final int CODE = 200;
@@ -537,5 +544,9 @@ public class RecipesRequestSucssesMock {
             "    \"image\": \"\"\n" +
             "  }\n" +
             "]";
+
+    public static List<Recipe> getRecipeObjectList() {
+        return new Gson().fromJson(RecipesRequestSucssesMock.BODY,new TypeToken<List<Recipe>>(){}.getType());
+    }
 
 }

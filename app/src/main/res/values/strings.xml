@@ -18,5 +18,6 @@
     <string name="empty_icon">Empty icon</string>
     <string name="empty_view_text">The list is empty.</string>
     <string name="widget_icon_content_description">Icon to indicate recipe selection to widget</string>
+    <string name="generic_error_text">oops! We encountered an error, please try again later!</string>
 
 </resources>

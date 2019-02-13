@@ -83,9 +83,6 @@ public class RecipeDetailListFragment extends Fragment {
             setupRecipeDetailRecyclerView();
             setupOnStepSelected();
             setupSelectionOnFirstItem();
-        } else {
-            // TODO - tratar erro quando não tiver recipe
-
         }
     }
 

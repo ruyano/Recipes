@@ -79,8 +79,6 @@ public class RecipeStepDetailFragment extends Fragment {
         fragmentRecipeStepDetailBinding.setModel(viewModel);
         if (step != null) {
             viewModel.setStepMutableLiveData(step);
-        } else {
-            // TODO - tratar erro quando não tiver recipe
         }
 
         validateIngredientsOnTablet();

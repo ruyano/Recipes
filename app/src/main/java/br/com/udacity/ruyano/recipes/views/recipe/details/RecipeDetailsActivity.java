@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.Objects;
@@ -107,8 +108,9 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
             } else {
                 setupPhoneFragments();
             }
+            showDetails();
         } else {
-            // TODO - tratar erro, quando não tiver uma receita
+            showGenericError();
         }
     }
 
@@ -139,6 +141,18 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
             startActivity(RecipeStepActivity.getIntent(this, recipe, recipe.getSteps().indexOf(step)));
             overridePendingTransition(R.anim.enter, R.anim.exit);
         }
+
+    }
+
+    private void showDetails() {
+        findViewById(R.id.generic_error_view).setVisibility(View.GONE);
+        findViewById(R.id.recipe_detail_fragment).setVisibility(View.VISIBLE);
+
+    }
+
+    private void showGenericError() {
+        findViewById(R.id.generic_error_view).setVisibility(View.VISIBLE);
+        findViewById(R.id.recipe_detail_fragment).setVisibility(View.GONE);
 
     }
 

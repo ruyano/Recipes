@@ -87,9 +87,6 @@ public class RecipeDetailFragment extends Fragment {
             observeRecipes();
             setupStepsRecyclerView();
             setupOnStepSelected();
-        } else {
-            // TODO - tratar erro quando não tiver recipe
-
         }
 
         if (showSteps) {
