@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+
+import java.util.Objects;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -79,7 +82,7 @@ public class RecipeDetailListFragment extends Fragment {
             viewModel.setRecipeMutableLiveData(recipe);
             setupRecipeDetailRecyclerView();
             setupOnStepSelected();
-
+            setupSelectionOnFirstItem();
         } else {
             // TODO - tratar erro quando não tiver recipe
 
@@ -107,5 +110,15 @@ public class RecipeDetailListFragment extends Fragment {
 
     }
 
+    private void setupSelectionOnFirstItem() {
+        fragmentRecipeDetailListBinding.recipeDetailListRecyclerView.getViewTreeObserver()
+                .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                    @Override public boolean onPreDraw() {
+                        Objects.requireNonNull(fragmentRecipeDetailListBinding.recipeDetailListRecyclerView.findViewHolderForAdapterPosition(0)).itemView.performClick();
+                        fragmentRecipeDetailListBinding.recipeDetailListRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                        return true;
+                    }
+                });
+    }
 
 }

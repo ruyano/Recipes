@@ -17,5 +17,6 @@
     <string name="no_internet_icon_content_description">No internet icon</string>
     <string name="empty_icon">Empty icon</string>
     <string name="empty_view_text">The list is empty.</string>
+    <string name="widget_icon_content_description">Icon to indicate recipe selection to widget</string>
 
 </resources>

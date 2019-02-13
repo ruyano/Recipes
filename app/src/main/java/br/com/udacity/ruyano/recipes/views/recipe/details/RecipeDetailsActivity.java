@@ -113,14 +113,10 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     }
 
     private void setupTabletFragments() {
-
-        // Setup master
         RecipeDetailListFragment recipeDetailListFragment = RecipeDetailListFragment.newInstance(recipe);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.master_fragment, recipeDetailListFragment)
                 .commit();
-
-        // Setup detail
 
     }
 

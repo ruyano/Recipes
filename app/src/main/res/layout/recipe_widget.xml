@@ -13,7 +13,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="10dp"
-        android:gravity="center">
+        android:gravity="center"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_pin_to_widget"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:contentDescription="@string/widget_icon_content_description" />
 
     </LinearLayout>
 
