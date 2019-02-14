@@ -7,12 +7,12 @@ Este projeto contem testes realizados com o Espresso, exibição de vídeo utili
 
 ## App rodando em celular
 <p align="center">
-  <img src="https://i.imgur.com/O31UR8o.gif" alt="Demo app"
+  <img src="https://github.com/ruyano/Recipes/blob/master/GIFS/recipe_cel.gif" alt="Demo cell app"
        width="400" height="750">
 </p>
 
 ## App rodando em tablet
 <p align="center">
-  <img src="https://i.imgur.com/O31UR8o.gif" alt="Demo app"
+  <img src="https://github.com/ruyano/Recipes/blob/master/GIFS/recipe_cel.gif" alt="Demo tablet app"
        width="400" height="750">
 </p>
