@@ -13,6 +13,6 @@ Este projeto contem testes realizados com o Espresso, exibição de vídeo utili
 
 ## App rodando em tablet
 <p align="center">
-  <img src="https://github.com/ruyano/Recipes/blob/master/GIFS/recipe_cel.gif" alt="Demo tablet app"
-       width="400" height="750">
+  <img src="https://github.com/ruyano/Recipes/blob/master/GIFS/ecipe_tablet.gif" alt="Demo tablet app"
+       width="750" height="400" style="transform:rotate(90deg);">
 </p>
