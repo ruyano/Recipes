@@ -3,14 +3,13 @@ package br.com.udacity.ruyano.recipes.views.step.details;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 
@@ -18,6 +17,7 @@ public class RecipeStepActivity extends AppCompatActivity {
 
     private static final String RECIPE_EXTRA = "RECIPE_EXTRA";
     private static final String STEP_POSITION_EXTRA = "STEP_POSITION_EXTRA";
+    private static final String DETAILS_FRAGMENT_TAG = "DETAILS_FRAGMENT_TAG";
 
     public static Intent getIntent(Context context, Recipe recipe, Integer stepPosition) {
         Intent intent = new Intent(context, RecipeStepActivity.class);
@@ -99,9 +99,13 @@ public class RecipeStepActivity extends AppCompatActivity {
                 && recipe.getSteps() != null
                 && recipe.getSteps().size() >= stepPosition
                 && recipe.getSteps().get(stepPosition) != null) {
-            RecipeStepDetailFragment recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(recipe, recipe.getSteps().get(stepPosition));
+
+            Fragment recipeStepDetailFragment = getSupportFragmentManager().findFragmentByTag(DETAILS_FRAGMENT_TAG);
+            if (recipeStepDetailFragment == null) {
+                recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(recipe, recipe.getSteps().get(stepPosition));
+            }
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.step_detail_fragment, recipeStepDetailFragment)
+                    .replace(R.id.step_detail_fragment, recipeStepDetailFragment, DETAILS_FRAGMENT_TAG)
                     .commit();
 
         }

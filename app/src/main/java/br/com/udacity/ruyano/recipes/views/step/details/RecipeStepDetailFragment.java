@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
@@ -14,6 +15,7 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -27,12 +29,17 @@ public class RecipeStepDetailFragment extends Fragment {
 
     private static final String ARG_RECIPE = "ARG_RECIPE";
     private static final String ARG_STEP = "ARG_STEP";
+    private static final String PLAYER_CURRENT_POS = "PLAYER_CURRENT_POS";
+    private static final String PLAY_WHEN_READY = "PLAY_WHEN_READY";
+
 
     private Recipe recipe;
     private Step step;
     private FragmentRecipeStepDetailBinding fragmentRecipeStepDetailBinding;
     private RecipeStepDetailViewModel viewModel;
     private SimpleExoPlayer player;
+    private long position = C.POSITION_UNSET;
+    private boolean playWhenReady = true;
 
     public RecipeStepDetailFragment() {}
 
@@ -59,6 +66,7 @@ public class RecipeStepDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentRecipeStepDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe_step_detail, container, false);
+        verifySavedInstance(savedInstanceState);
         setupBindings(savedInstanceState);
         return fragmentRecipeStepDetailBinding.getRoot();
     }
@@ -69,6 +77,21 @@ public class RecipeStepDetailFragment extends Fragment {
         if (player!=null) {
             player.release();
             player = null;
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(PLAYER_CURRENT_POS, Math.max(0, player.getCurrentPosition()));
+        outState.putBoolean(PLAY_WHEN_READY, player.getPlayWhenReady());
+
+    }
+
+    public void verifySavedInstance(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            position = savedInstanceState.getLong(PLAYER_CURRENT_POS, C.POSITION_UNSET);
+            playWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY, true);
         }
     }
 
@@ -122,7 +145,10 @@ public class RecipeStepDetailFragment extends Fragment {
                 .createMediaSource(mUri);
         // Prepare the player with the source.
         player.prepare(videoSource);
-        player.setPlayWhenReady(true);
+        if (position != C.POSITION_UNSET) {
+            player.seekTo(position);
+        }
+        player.setPlayWhenReady(playWhenReady);
 
     }
 }
