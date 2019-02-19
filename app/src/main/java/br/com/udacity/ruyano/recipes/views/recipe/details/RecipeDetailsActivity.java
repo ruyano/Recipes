@@ -1,6 +1,7 @@
 package br.com.udacity.ruyano.recipes.views.recipe.details;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import br.com.udacity.ruyano.recipes.R;
 import br.com.udacity.ruyano.recipes.models.Recipe;
 import br.com.udacity.ruyano.recipes.models.Step;
@@ -25,6 +26,7 @@ import java.util.Objects;
 public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDetailFragment.OnFragmentInteractionListener, RecipeDetailListFragment.OnFragmentInteractionListener {
 
     private static final String RECIPE_EXTRA = "RECIPE_EXTRA";
+    private static final String DETAILS_FRAGMENT_TAG = "DETAILS_FRAGMENT_TAG";
 
     public static Intent getIntent(Context context, Recipe recipe) {
         Intent intent = new Intent(context, RecipeDetailsActivity.class);
@@ -44,6 +46,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
 
         getExtras();
         setActionBarTitle();
+        setupVisibility();
 
         if (savedInstanceState == null) {
             setupFragment();
@@ -108,10 +111,16 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
             } else {
                 setupPhoneFragments();
             }
-            showDetails();
-        } else {
-            showGenericError();
         }
+
+    }
+
+    private void setupVisibility() {
+        if (recipe != null)
+            showDetails();
+        else
+            showGenericError();
+
     }
 
     private void setupTabletFragments() {
@@ -133,9 +142,12 @@ public class RecipeDetailsActivity extends AppCompatActivity implements RecipeDe
     @Override
     public void onStepSelected(Step step) {
         if (getResources().getBoolean(R.bool.isTablet)) {
-            RecipeStepDetailFragment recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(recipe, step);
+            Fragment recipeStepDetailFragment = getSupportFragmentManager().findFragmentByTag(DETAILS_FRAGMENT_TAG + step.getId());
+            if (recipeStepDetailFragment == null) {
+                recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(recipe, step);
+            }
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.detail_fragment, recipeStepDetailFragment)
+                    .replace(R.id.detail_fragment, recipeStepDetailFragment, DETAILS_FRAGMENT_TAG + step.getId())
                     .commit();
         } else {
             startActivity(RecipeStepActivity.getIntent(this, recipe, recipe.getSteps().indexOf(step)));

@@ -82,7 +82,7 @@ public class RecipeDetailListFragment extends Fragment {
             viewModel.setRecipeMutableLiveData(recipe);
             setupRecipeDetailRecyclerView();
             setupOnStepSelected();
-            setupSelectionOnFirstItem();
+            setupSelectionOnFirstItem(savedInstanceState);
         }
     }
 
@@ -107,15 +107,18 @@ public class RecipeDetailListFragment extends Fragment {
 
     }
 
-    private void setupSelectionOnFirstItem() {
-        fragmentRecipeDetailListBinding.recipeDetailListRecyclerView.getViewTreeObserver()
-                .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                    @Override public boolean onPreDraw() {
-                        Objects.requireNonNull(fragmentRecipeDetailListBinding.recipeDetailListRecyclerView.findViewHolderForAdapterPosition(0)).itemView.performClick();
-                        fragmentRecipeDetailListBinding.recipeDetailListRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
-                        return true;
-                    }
-                });
+    private void setupSelectionOnFirstItem(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            fragmentRecipeDetailListBinding.recipeDetailListRecyclerView.getViewTreeObserver()
+                    .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                        @Override
+                        public boolean onPreDraw() {
+                            Objects.requireNonNull(fragmentRecipeDetailListBinding.recipeDetailListRecyclerView.findViewHolderForAdapterPosition(0)).itemView.performClick();
+                            fragmentRecipeDetailListBinding.recipeDetailListRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                            return true;
+                        }
+                    });
+        }
     }
 
 }

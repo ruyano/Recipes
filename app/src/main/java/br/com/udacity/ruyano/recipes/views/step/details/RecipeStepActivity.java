@@ -8,6 +8,7 @@ import android.view.View;
 
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import br.com.udacity.ruyano.recipes.R;
@@ -18,6 +19,7 @@ public class RecipeStepActivity extends AppCompatActivity {
     private static final String RECIPE_EXTRA = "RECIPE_EXTRA";
     private static final String STEP_POSITION_EXTRA = "STEP_POSITION_EXTRA";
     private static final String DETAILS_FRAGMENT_TAG = "DETAILS_FRAGMENT_TAG";
+    private static final String STEP_POSITION = "STEP_POSITION";
 
     public static Intent getIntent(Context context, Recipe recipe, Integer stepPosition) {
         Intent intent = new Intent(context, RecipeStepActivity.class);
@@ -28,7 +30,7 @@ public class RecipeStepActivity extends AppCompatActivity {
     }
 
     private Recipe recipe;
-    private Integer stepPosition;
+    private Integer stepPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +40,20 @@ public class RecipeStepActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         getExtras();
+        verifySavedInstance(savedInstanceState);
         setActionBarTitle();
         setupPhoneFragments();
         setupButtons();
 
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STEP_POSITION, stepPosition);
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -59,6 +70,12 @@ public class RecipeStepActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+    }
+
+    public void verifySavedInstance(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            stepPosition = savedInstanceState.getInt(STEP_POSITION, 0);
+        }
     }
 
     private void setupButtons() {
@@ -100,12 +117,12 @@ public class RecipeStepActivity extends AppCompatActivity {
                 && recipe.getSteps().size() >= stepPosition
                 && recipe.getSteps().get(stepPosition) != null) {
 
-            Fragment recipeStepDetailFragment = getSupportFragmentManager().findFragmentByTag(DETAILS_FRAGMENT_TAG);
+            Fragment recipeStepDetailFragment = getSupportFragmentManager().findFragmentByTag(DETAILS_FRAGMENT_TAG + stepPosition);
             if (recipeStepDetailFragment == null) {
                 recipeStepDetailFragment = RecipeStepDetailFragment.newInstance(recipe, recipe.getSteps().get(stepPosition));
             }
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.step_detail_fragment, recipeStepDetailFragment, DETAILS_FRAGMENT_TAG)
+                    .replace(R.id.step_detail_fragment, recipeStepDetailFragment, DETAILS_FRAGMENT_TAG + stepPosition)
                     .commit();
 
         }

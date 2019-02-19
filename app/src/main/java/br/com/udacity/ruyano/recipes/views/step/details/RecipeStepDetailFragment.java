@@ -32,7 +32,6 @@ public class RecipeStepDetailFragment extends Fragment {
     private static final String PLAYER_CURRENT_POS = "PLAYER_CURRENT_POS";
     private static final String PLAY_WHEN_READY = "PLAY_WHEN_READY";
 
-
     private Recipe recipe;
     private Step step;
     private FragmentRecipeStepDetailBinding fragmentRecipeStepDetailBinding;
@@ -83,9 +82,10 @@ public class RecipeStepDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong(PLAYER_CURRENT_POS, Math.max(0, player.getCurrentPosition()));
-        outState.putBoolean(PLAY_WHEN_READY, player.getPlayWhenReady());
-
+        if (player != null) {
+            outState.putLong(PLAYER_CURRENT_POS, Math.max(0, player.getCurrentPosition()));
+            outState.putBoolean(PLAY_WHEN_READY, player.getPlayWhenReady());
+        }
     }
 
     public void verifySavedInstance(Bundle savedInstanceState) {
@@ -150,5 +150,9 @@ public class RecipeStepDetailFragment extends Fragment {
         }
         player.setPlayWhenReady(playWhenReady);
 
+    }
+
+    public Step getStep() {
+        return step;
     }
 }
