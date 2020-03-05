@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -71,5 +73,11 @@ dependencies {
 
     // okhttp3-idling-resource IdlingResource para as chamadas REST, usado para o teste esperar a comclusão da chamada.
     androidTestImplementation "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
+    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }

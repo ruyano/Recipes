@@ -27,22 +27,18 @@ public class MainViewModel extends ViewModel {
         repository = new RecipeRepository();
         recipesAdapter = new RecipesAdapter(this);
         selectedRecipeMutableLiveData = new MutableLiveData<>();
-
     }
 
     public void getRecipes() {
         repository.getRecipes();
-
     }
 
     public MutableLiveData<List<Recipe>> getRecipesLiveData() {
         return repository.getRecipesLiveData();
-
     }
 
     public RecipesAdapter getAdapter() {
         return recipesAdapter;
-
     }
 
     public Recipe getRecipeAt(Integer position) {
@@ -57,36 +53,30 @@ public class MainViewModel extends ViewModel {
         Recipe selected = getRecipeAt(index);
         if (selected != null) {
             selectedRecipeMutableLiveData.setValue(selected);
-
         }
-
     }
 
 
     public MutableLiveData<Recipe> getSelectedRecipeMutableLiveData() {
         return selectedRecipeMutableLiveData;
-
     }
 
     public void showRecipesList() {
         recipesRecyclerViewVisibility.set(View.VISIBLE);
         noInternetViewVisibility.set(View.GONE);
         emptyViewVisibility.set(View.GONE);
-
     }
 
     public void showNoInternetView() {
         recipesRecyclerViewVisibility.set(View.GONE);
         noInternetViewVisibility.set(View.VISIBLE);
         emptyViewVisibility.set(View.GONE);
-
     }
 
     public void showEmptyView() {
         recipesRecyclerViewVisibility.set(View.GONE);
         noInternetViewVisibility.set(View.GONE);
         emptyViewVisibility.set(View.VISIBLE);
-
     }
 
 }

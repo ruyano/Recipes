@@ -4,8 +4,6 @@ import androidx.test.espresso.IdlingResource;
 
 public class MainIdlingResource implements IdlingResource {
 
-
-
     @Override
     public String getName() {
         return null;
