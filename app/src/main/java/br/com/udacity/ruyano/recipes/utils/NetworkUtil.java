@@ -5,14 +5,12 @@ import android.net.ConnectivityManager;
 
 public class NetworkUtil {
 
-    public static boolean isTestingDesconnection = false;
+    public static boolean isTestingDisconnection = false;
 
-    public static boolean isConected(Context context) {
-        boolean isConected;
-        ConnectivityManager conectivtyManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        isConected = conectivtyManager.getActiveNetworkInfo() != null && conectivtyManager.getActiveNetworkInfo().isConnected();
-        return !isTestingDesconnection && isConected;
-
+    public static boolean isConnected(Context context) {
+        boolean isConnected;
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        isConnected = connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+        return !isTestingDisconnection && isConnected;
     }
-
 }

@@ -31,21 +31,22 @@ ext {
     lifecycleExtensionsVersion = '1.1.1'
     retrofitVersion = '2.4.0'
     gsonVersion = '2.8.5'
-    glideVersion = '4.8.0'
+    glideVersion = '4.9.0'
     exoplayer = '2.9.4'
     okHttpVersion = '3.12.0'
+    mockk_version = '1.9.3'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    implementation 'androidx.appcompat:appcompat:1.2.0-alpha02'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
-    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
 
     implementation 'androidx.cardview:cardview:1.0.0'
 
@@ -70,13 +71,16 @@ dependencies {
     androidTestImplementation "com.android.support.test:rules:1.0.2"
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
     implementation "com.squareup.okhttp3:okhttp:${okHttpVersion}"
-
-    // okhttp3-idling-resource IdlingResource para as chamadas REST, usado para o teste esperar a comclusão da chamada.
-    androidTestImplementation "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
-    implementation "androidx.core:core-ktx:+"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+    implementation "androidx.core:core-ktx:1.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // Koin
+    implementation "org.koin:koin-android:2.0.1"
+    implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
+    implementation 'org.koin:koin-androidx-scope:2.0.1'
+
+    testImplementation "io.mockk:mockk:$mockk_version"
 }
 repositories {
     mavenCentral()

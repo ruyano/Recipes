@@ -40,7 +40,7 @@ class MainActivityRobot(
     }
 
     fun disableNetWorkConnection() = apply {
-        NetworkUtil.isTestingDesconnection = true
+        NetworkUtil.isTestingDisconnection = true
     }
 
     fun checkIfNoInternetViewIsDisplayed() = apply {
