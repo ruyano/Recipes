@@ -2,13 +2,11 @@ package br.com.udacity.ruyano.recipes.views.main
 
 import android.view.View
 import androidx.databinding.ObservableField
-import androidx.databinding.ObservableInt
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import br.com.udacity.ruyano.recipes.models.Recipe
 import br.com.udacity.ruyano.recipes.networking.repositories.RecipeRepository
-import br.com.udacity.ruyano.recipes.utils.NetworkUtil
 
 class MainViewModel(
         private var repository: RecipeRepository
@@ -20,13 +18,16 @@ class MainViewModel(
 
     var adapter: RecipesAdapter? = null
 
-    var selectedRecipeMutableLiveData = MutableLiveData<Recipe>()
+    private var _selectedRecipeMutableLiveData: MutableLiveData<Recipe>? = null
+    var selectedRecipeMutableLiveData: LiveData<Recipe>? = null
 
     fun init() {
         recipesRecyclerViewVisibility = ObservableField(View.GONE)
         noInternetViewVisibility = ObservableField(View.GONE)
         emptyViewVisibility = ObservableField(View.GONE)
         adapter = RecipesAdapter(this)
+        _selectedRecipeMutableLiveData = MutableLiveData()
+        selectedRecipeMutableLiveData = _selectedRecipeMutableLiveData
     }
 
     fun callRecipes() {
@@ -65,7 +66,7 @@ class MainViewModel(
 
     fun onItemClick(index: Int) {
         getRecipeAt(index)?.let {
-            selectedRecipeMutableLiveData?.value = it
+            _selectedRecipeMutableLiveData?.value = it
         }
     }
 
